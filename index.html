@@ -77,9 +77,10 @@
             });
             //let url = "https://docs.google.com/forms/d/e/1FAIpQLSegHIW7hP5lGt7LakE-il1ehNHhOIY_Zu7AQ2Jg9BnSrmYyaA/formResponse?&submit=Submit?usp=pp_url"+query;
             let url = "https://docs.google.com/forms/d/e/1FAIpQLSegHIW7hP5lGt7LakE-il1ehNHhOIY_Zu7AQ2Jg9BnSrmYyaA/viewform?usp=pp_url&"+query;
-            const link = document.getElementById('urlForm');
-            link.setAttribute('href', url);
-            link.innerHTML = url;
+            window.open(url, "_blank");
+            // const link = document.getElementById('urlForm');
+            // link.setAttribute('href', url);
+            // link.innerHTML = url;
         }
         function submitForm(){
             const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSegHIW7hP5lGt7LakE-il1ehNHhOIY_Zu7AQ2Jg9BnSrmYyaA/formResponse";
