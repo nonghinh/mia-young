@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Google form Api</title>
+</head>
+<body>
+    <div class="aa">
+        <button onclick="getUrlForm();">Get Form URL</button>
+        <a href="" id="urlForm" target="_blank"></a>
+    </div>
+    <script>
+        let xx = [
+            {"entry.483028849": "Female / Nữ"},
+            {"entry.1409671815": "18 - 25 years old / Từ 18 đến 25 tuổi"},
+            {"entry.174432568": "6 months - 1 year / 6 tháng - 1 năm"},
+            {"entry.1674727200": "3"},
+            {"entry.567293000": "2"},
+            {"entry.2087316961": "4"},
+            {"entry.307010975": "3"},
+            {"entry.1924380216": "2"},
+            {"entry.1179895298": "3"},
+            {"entry.1817564026": "2"},
+            {"entry.465900666": "3"},
+            {"entry.1254753007": "3"},
+            {"entry.1446829837": "4"},
+            {"entry.490079914": "4"},
+            {"entry.54601943": "3"},
+            {"entry.1966269325": "4"},
+            {"entry.1332921201": "3"},
+            {"entry.1533941781": "4"},
+            {"entry.361446042": "3"},
+            {"entry.1221697895": "4"},
+            {"entry.1159201167": "2"},
+            {"entry.521235958": "3"},
+            {"entry.1331125555": "4"},
+            {"entry.391440851": "3"},
+            {"entry.794119175": "5"}
+        ];
+        let questions = [
+            {"name": "entry.483028849", "options": ["Male / Nam", "Female / Nữ"]},
+            {"name": "entry.1409671815", "options": ["18 - 25 years old / Từ 18 đến 25 tuổi", "25 -40 years old / Từ 25 đến 40 tuổi"]},
+            {"name": "entry.174432568", "options": ["Less than 6 months / Dưới 6 tháng", "6 months - 1 year / 6 tháng - 1 năm","1 - 2 years / 1 - 2 năm", "More than 2 years / Hơn 2 năm"]},
+            {"name": "entry.334800587", "options": ["MoMo", "ZaloPay", "ViettelPay"]},
+            {"name": "entry.1674727200", "options": ["3", "4", "5"]},
+            {"name": "entry.567293000", "options": ["3", "4", "5"]},
+            {"name": "entry.2087316961", "options": ["3", "4", "5"]},
+            {"name": "entry.307010975", "options": ["3", "4", "5"]},
+            {"name": "entry.1924380216", "options": ["3", "4", "5"]},
+            {"name": "entry.1179895298", "options": ["3", "4", "5"]},
+            {"name": "entry.1817564026", "options": ["3", "4", "5"]},
+            {"name": "entry.465900666", "options": ["3", "4", "5"]},
+            {"name": "entry.1254753007", "options": ["3", "4", "5"]},
+            {"name": "entry.1446829837", "options": ["3", "4", "5"]},
+            {"name": "entry.490079914", "options": ["2", "3"]},
+            {"name": "entry.54601943", "options": ["2", "3"]},
+            {"name": "entry.1966269325", "options": ["2", "3"]},
+            {"name": "entry.1332921201", "options": ["2", "3"]},
+            {"name": "entry.1533941781", "options": ["3", "4", "5"]},
+            {"name": "entry.361446042", "options": ["3", "4", "5"]},
+            {"name": "entry.1221697895", "options": ["3", "4", "5"]},
+            {"name": "entry.1159201167", "options": ["3", "4", "5"]},
+            {"name": "entry.521235958", "options": ["3", "4", "5"]},
+            {"name": "entry.1331125555", "options": ["3", "4", "5"]},
+            {"name": "entry.391440851", "options": ["3", "4", "5"]},
+            {"name": "entry.794119175", "options": ["3", "4", "5"]},
+        ];
+        //let urlForm = "https://docs.google.com/forms/d/e/1FAIpQLSejUvufjvLk6J1xUlNgnc9uvibjhKCCCDEf8hh6NMuByWs1kA/formResponse?&submit=Submit?usp=pp_url&entry.41133404=Ch%C3%B3&entry.1423737226=Th%E1%BB%A9+7&entry.1423737226=Ch%E1%BB%89+nh%E1%BA%ADt";
+        let urlForm = "https://docs.google.com/forms/d/e/1FAIpQLSegHIW7hP5lGt7LakE-il1ehNHhOIY_Zu7AQ2Jg9BnSrmYyaA/viewform?usp=pp_url&entry.483028849=Female+/+N%E1%BB%AF&entry.1409671815=18+-+25+years+old+/+T%E1%BB%AB+18+%C4%91%E1%BA%BFn+25+tu%E1%BB%95i&entry.174432568=6+months+-+1+year+/+6+th%C3%A1ng+-+1+n%C4%83m&entry.334800587=ViettelPay&entry.1674727200=3&entry.567293000=2&entry.2087316961=4&entry.307010975=3&entry.1924380216=2&entry.1179895298=3&entry.1817564026=2&entry.465900666=3&entry.1254753007=3&entry.1446829837=4&entry.490079914=4&entry.54601943=3&entry.1966269325=4&entry.1332921201=3&entry.1533941781=4&entry.361446042=3&entry.1221697895=4&entry.1159201167=2&entry.521235958=3&entry.1331125555=4&entry.391440851=3&entry.794119175=5";
+        function getUrlForm(){
+            let query = "";
+            questions.forEach(function (item){
+                query += "&"+item.name +"="+ encodeURIComponent(getRandomElementFromArray(item.options));
+            });
+            //let url = "https://docs.google.com/forms/d/e/1FAIpQLSegHIW7hP5lGt7LakE-il1ehNHhOIY_Zu7AQ2Jg9BnSrmYyaA/formResponse?&submit=Submit?usp=pp_url"+query;
+            let url = "https://docs.google.com/forms/d/e/1FAIpQLSegHIW7hP5lGt7LakE-il1ehNHhOIY_Zu7AQ2Jg9BnSrmYyaA/viewform?usp=pp_url&"+query;
+            const link = document.getElementById('urlForm');
+            link.setAttribute('href', url);
+            link.innerHTML = url;
+        }
+        function submitForm(){
+            const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSegHIW7hP5lGt7LakE-il1ehNHhOIY_Zu7AQ2Jg9BnSrmYyaA/formResponse";
+            let formData = {};
+            questions.forEach(function (item){
+                formData[item.name] = getRandomElementFromArray(item.options);
+            });
+            const urlEncodedData = new URLSearchParams(formData).toString();
+            fetch(formUrl, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: urlEncodedData,
+            })
+                .then(response => {
+                    if (response.ok) {
+                        console.log("Gửi dữ liệu thành công!");
+                    } else {
+                        console.error("Lỗi khi gửi form:", response.statusText);
+                    }
+                })
+                .catch(error => {
+                    console.error("Đã xảy ra lỗi:", error);
+                });
+        }
+        function getRandomElementFromArray(arr) {
+            if (!Array.isArray(arr) || arr.length === 0) {
+                throw new Error("Input phải là một mảng không rỗng.");
+            }
+            const randomIndex = Math.floor(Math.random() * arr.length);
+            return arr[randomIndex];
+        }
+    </script>
+</body>
+</html>
